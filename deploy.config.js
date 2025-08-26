@@ -36,12 +36,10 @@ module.exports = {
       "web-deploy.config.js",
       "package*.json",
       "universal-deployer/**",
-      "test-project/**",
       "scripts/**",
       "README.md",
-      "AUTOMATION_GUIDE.md",
-      "INTEGRATION_GUIDE.md",
-      "deploy.bat"
+      "deploy.bat",
+      ".deploy-temp/**"
     ]
   },
   "general": {

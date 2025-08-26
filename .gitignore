@@ -2,3 +2,4 @@
 .deploy-temp/
 .env
 *.log
+.vercel

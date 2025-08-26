@@ -3,8 +3,39 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 class GitHubPagesDeployer {
-  constructor() {
-    this.tempDir = path.join(process.cwd(), '.deploy-temp');
+  constructor(rootDir = null) {
+    // 使用传入的rootDir或者寻找项目根目录，避免.deploy-temp无限嵌套问题
+    const projectRoot = rootDir || this.findProjectRoot();
+    this.tempDir = path.join(projectRoot, '.deploy-temp');
+  }
+
+  // 寻找项目根目录（包含package.json或.git的目录）
+  findProjectRoot(startDir = process.cwd()) {
+    let currentDir = startDir;
+    
+    while (currentDir !== path.dirname(currentDir)) {
+      // 检查是否存在package.json或.git目录
+      if (fs.existsSync(path.join(currentDir, 'package.json')) || 
+          fs.existsSync(path.join(currentDir, '.git'))) {
+        return currentDir;
+      }
+      
+      // 如果当前目录包含.deploy-temp，向上查找
+      if (path.basename(currentDir) === '.deploy-temp') {
+        currentDir = path.dirname(currentDir);
+        continue;
+      }
+      
+      // 向上查找
+      currentDir = path.dirname(currentDir);
+    }
+    
+    // 如果找不到项目根目录，使用当前工作目录，但排除.deploy-temp路径
+    let cwd = process.cwd();
+    while (cwd.includes('.deploy-temp')) {
+      cwd = path.dirname(cwd);
+    }
+    return cwd;
   }
 
   log(message, type = 'info') {
@@ -137,13 +168,45 @@ class GitHubPagesDeployer {
 4. 然后使用上述方法一或方法二进行认证`;
   }
 
+  // 清理临时目录
+  cleanupTempDir() {
+    if (fs.existsSync(this.tempDir)) {
+      try {
+        this.log(`清理临时目录: ${this.tempDir}`);
+        // 强制删除临时目录，包括只读文件
+        if (process.platform === 'win32') {
+          // Windows系统使用attrib命令移除只读属性
+          try {
+            execSync(`attrib -R "${this.tempDir}\\*.*" /S`, { stdio: 'ignore' });
+          } catch (e) {
+            // 忽略attrib命令错误
+          }
+        }
+        fs.rmSync(this.tempDir, { recursive: true, force: true });
+      } catch (error) {
+        this.log(`临时目录清理失败: ${error.message}`, 'warning');
+        // 如果删除失败，尝试重命名为删除标记
+        try {
+          const deleteMark = `${this.tempDir}_DELETE_${Date.now()}`;
+          fs.renameSync(this.tempDir, deleteMark);
+          this.log(`临时目录已标记为删除: ${deleteMark}`, 'warning');
+        } catch (renameError) {
+          this.log(`无法标记临时目录删除: ${renameError.message}`, 'error');
+        }
+      }
+    }
+  }
+
   // 准备部署文件
   prepareFiles(config, rootDir) {
     this.log('准备部署文件...');
     
     // 清理临时目录
-    if (fs.existsSync(this.tempDir)) {
-      fs.rmSync(this.tempDir, { recursive: true, force: true });
+    this.cleanupTempDir();
+    
+    // 确保临时目录不在自身内部创建
+    if (this.tempDir.includes(rootDir) && rootDir.includes('.deploy-temp')) {
+      throw new Error('检测到.deploy-temp路径嵌套问题，请检查项目根目录设置');
     }
     
     fs.mkdirSync(this.tempDir, { recursive: true });
@@ -244,7 +307,7 @@ class GitHubPagesDeployer {
 
       // 清理临时目录
       process.chdir(rootDir);
-      fs.rmSync(this.tempDir, { recursive: true, force: true });
+      this.cleanupTempDir();
 
       const url = `https://${username}.github.io/${repository}`;
       
@@ -258,13 +321,11 @@ class GitHubPagesDeployer {
 
     } catch (error) {
       // 清理临时目录
-      if (fs.existsSync(this.tempDir)) {
-        try {
-          process.chdir(rootDir);
-          fs.rmSync(this.tempDir, { recursive: true, force: true });
-        } catch (cleanupError) {
-          // 忽略清理错误
-        }
+      try {
+        process.chdir(rootDir);
+        this.cleanupTempDir();
+      } catch (cleanupError) {
+        this.log(`清理异常: ${cleanupError.message}`, 'warning');
       }
 
       return {
@@ -278,7 +339,7 @@ class GitHubPagesDeployer {
 
 module.exports = {
   deploy: async (config, rootDir) => {
-    const deployer = new GitHubPagesDeployer();
+    const deployer = new GitHubPagesDeployer(rootDir);
     return await deployer.deploy(config, rootDir);
   }
 };

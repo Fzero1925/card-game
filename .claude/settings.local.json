@@ -9,7 +9,13 @@
       "Bash(git init:*)",
       "Bash(git config:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(timeout 30 npm run deploy:github)",
+      "Bash(timeout 15 npm run deploy:vercel)",
+      "Bash(npm run deploy:init:*)",
+      "Bash(pkill:*)",
+      "Bash(timeout 5 npm run deploy:all)",
+      "Bash(if exist \"error.txt\" del \"error.txt\")"
     ],
     "deny": [],
     "ask": []
