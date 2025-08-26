@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Bash(del DEPLOYMENT_GUIDE.md)",
+      "Bash(cp:*)",
+      "Bash(deploy.bat help)",
+      "Bash(timeout 30 node:*)",
+      "Bash(git init:*)",
+      "Bash(git config:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

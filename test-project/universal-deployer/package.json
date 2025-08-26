@@ -1,0 +1,44 @@
+{
+  "name": "universal-web-deployer",
+  "version": "1.0.0",
+  "description": "Universal web deployment tool with smart error handling for GitHub Pages and Vercel",
+  "main": "lib/index.js",
+  "bin": {
+    "web-deploy": "bin/cli.js"
+  },
+  "keywords": [
+    "deploy",
+    "deployment",
+    "github-pages",
+    "vercel",
+    "static-site",
+    "web",
+    "automation"
+  ],
+  "author": "Fzero1925",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "readline": "^1.3.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fzero1925/universal-web-deployer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fzero1925/universal-web-deployer/issues"
+  },
+  "homepage": "https://github.com/Fzero1925/universal-web-deployer#readme",
+  "files": [
+    "lib/",
+    "bin/",
+    "templates/",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

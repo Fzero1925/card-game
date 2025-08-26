@@ -1,0 +1,4 @@
+# 部署相关
+.deploy-temp/
+.env
+*.log

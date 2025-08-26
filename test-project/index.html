@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Project - Universal Web Deployer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .success {
+            color: #28a745;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 Universal Web Deployer 测试页面</h1>
+    
+    <div class="success">✅ 部署成功！</div>
+    
+    <div class="info">
+        <h2>测试信息</h2>
+        <p><strong>项目：</strong>Test Project</p>
+        <p><strong>部署工具：</strong>Universal Web Deployer</p>
+        <p><strong>时间：</strong><span id="datetime"></span></p>
+    </div>
+    
+    <div class="info">
+        <h2>功能特性</h2>
+        <ul style="text-align: left; display: inline-block;">
+            <li>🎯 一键部署 - 支持 GitHub Pages 和 Vercel</li>
+            <li>🛠️ 智能错误处理 - 详细的诊断和解决方案</li>
+            <li>✅ 预部署验证 - 自动检查环境配置</li>
+            <li>💡 用户友好提示 - 分步骤问题解决指南</li>
+            <li>📦 独立可复用 - 可在任何项目中使用</li>
+        </ul>
+    </div>
+    
+    <script>
+        document.getElementById('datetime').textContent = new Date().toLocaleString('zh-CN');
+    </script>
+</body>
+</html>
