@@ -78,7 +78,6 @@ card-game/
 ├── script.js           # 游戏逻辑
 ├── vercel.json         # Vercel部署配置
 ├── deploy.config.js    # 部署配置
-├── universal-deployer/ # 部署工具（独立工具）
 └── README.md           # 项目说明
 ```
 
@@ -86,7 +85,6 @@ card-game/
 
 - **前端**：HTML5、CSS3、原生JavaScript
 - **部署**：GitHub Pages、Vercel
-- **工具**：Universal Web Deployer（自研部署工具）
 
 ## 🔮 未来计划
 
@@ -100,21 +98,13 @@ card-game/
 
 ## 🚀 部署
 
-本项目使用自研的Universal Web Deployer工具，支持一键部署到多个平台：
+本项目可部署到多个平台：
 
-```bash
-# 安装依赖
-npm install
+### GitHub Pages
+直接推送到gh-pages分支或使用GitHub Actions自动部署。
 
-# 一键部署到所有平台
-npm run deploy:all
-
-# 单独部署到GitHub Pages
-npm run deploy:github
-
-# 单独部署到Vercel  
-npm run deploy:vercel
-```
+### Vercel
+连接GitHub仓库，自动检测并部署静态文件。
 
 ## 🤝 贡献
 

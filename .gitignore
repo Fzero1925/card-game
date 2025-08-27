@@ -1,5 +1,52 @@
-# 部署相关
-.deploy-temp/
+# 🚫 Card Game 项目 - 忽略文件配置
+# 只上传网站核心文件，忽略部署工具和测试文件
+
+# 🔧 Universal Web Deployer 工具文件 - 不上传
+universal-deployer/
+deploy.config.js
+deploy.bat
+*.ps1
+UNIVERSAL-DEPLOYER-FILES.md
+
+# 📦 Node.js 相关文件 - 不上传
+node_modules/
+package.json
+package-lock.json
+npm-debug.log*
+yarn.lock
+
+# 🗂️ 部署生成文件 - 不上传
+.deploy-temp*/
+.vercel/
+dist/
+build/
+
+# 🛠️ 开发和测试文件 - 不上传
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 *.log
-.vercel
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# 🎯 Claude Code 配置 - 不上传
+.claude/
+
+# 📝 备份和临时文件 - 不上传
+*.backup
+*.bak
+*.old
+*.orig
+*~
+
+# 💡 注意：只有以下文件会被上传到 GitHub：
+# ✅ index.html    - 游戏主页面
+# ✅ style.css     - 游戏样式
+# ✅ script.js     - 游戏逻辑  
+# ✅ vercel.json   - Vercel 配置
+# ✅ README.md     - 项目说明
+# ✅ .gitignore    - 本忽略文件
