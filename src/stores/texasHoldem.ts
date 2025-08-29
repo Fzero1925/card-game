@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { useCardDeck } from '@/composables/useCardDeck'\nimport { getAIDecision } from '@/utils/ai/pokerAI'
+import { useCardDeck } from '@/composables/useCardDeck'
+import { getAIDecision } from '@/utils/ai/pokerAI'
 import type { 
   TexasHoldemState, 
   PokerPlayer, 

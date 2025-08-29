@@ -279,7 +279,7 @@ const handleAction = (action: PokerAction) => {
       }
 
       .phase-indicator {
-        font-size: $font-md;
+        font-size: $font-base;
         font-weight: 600;
         color: #ffd700;
       }
@@ -464,7 +464,7 @@ const handleAction = (action: PokerAction) => {
 
   h3 {
     color: white;
-    font-size: $font-md;
+    font-size: $font-base;
     margin-bottom: $spacing-sm;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
