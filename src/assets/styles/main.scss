@@ -1,0 +1,131 @@
+@import './variables.scss';
+
+// 重置样式
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+// 通用类
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-radius: $border-radius-md;
+  font-size: $font-base;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  &.primary {
+    background: $primary-color;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background: darken($primary-color, 10%);
+      transform: translateY(-1px);
+      box-shadow: $shadow-md;
+    }
+  }
+  
+  &.secondary {
+    background: #6c757d;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background: darken(#6c757d, 10%);
+    }
+  }
+  
+  &.success {
+    background: $success-color;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background: darken($success-color, 10%);
+    }
+  }
+  
+  &.danger {
+    background: $danger-color;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background: darken($danger-color, 10%);
+    }
+  }
+}
+
+.card {
+  background: white;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-lg;
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+// 响应式辅助类
+@media (max-width: $breakpoint-md) {
+  .container {
+    padding: 0 $spacing-sm;
+  }
+  
+  .btn {
+    font-size: $font-sm;
+    padding: $spacing-xs $spacing-sm;
+  }
+}
+
+// 动画
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}

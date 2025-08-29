@@ -1,0 +1,174 @@
+{
+  "app": {
+    "title": "棋牌游戏平台",
+    "subtitle": "体验经典棋牌游戏的乐趣"
+  },
+  "nav": {
+    "home": "游戏大厅",
+    "blackjack": "21点",
+    "texasHoldem": "德州扑克",
+    "settings": "设置",
+    "language": "语言"
+  },
+  "games": {
+    "blackjack": {
+      "title": "21点",
+      "description": "经典的21点游戏，挑战庄家获得胜利",
+      "actions": {
+        "hit": "要牌",
+        "stand": "停牌",
+        "double": "加倍",
+        "deal": "发牌",
+        "newGame": "新游戏"
+      },
+      "status": {
+        "playerMoney": "筹码",
+        "currentBet": "下注",
+        "playerScore": "玩家点数",
+        "dealerScore": "庄家点数"
+      },
+      "messages": {
+        "blackjack": "黑杰克！你赢了！",
+        "bust": "爆牌了！你输了！",
+        "dealerBust": "庄家爆牌！你赢了！",
+        "win": "你赢了！",
+        "lose": "庄家赢了！",
+        "tie": "平局！",
+        "placeBet": "请先下注！",
+        "gameOver": "游戏结束！你没钱了！"
+      }
+    },
+    "texasHoldem": {
+      "title": "德州扑克",
+      "description": "与AI对手进行德州扑克对战",
+      "actions": {
+        "fold": "弃牌",
+        "call": "跟注",
+        "raise": "加注",
+        "check": "过牌",
+        "allIn": "全押",
+        "all-in": "全押",
+        "startHand": "开始游戏"
+      },
+      "status": {
+        "pot": "底池",
+        "bet": "下注",
+        "chips": "筹码"
+      }
+    }
+  },
+  "common": {
+    "play": "开始游戏",
+    "back": "返回",
+    "confirm": "确认",
+    "cancel": "取消",
+    "loading": "加载中...",
+    "error": "出错了",
+    "success": "成功",
+    "rules": "游戏规则",
+    "placeBet": "下注",
+    "allIn": "全押",
+    "confirmNewGame": "确定要开始新游戏吗？",
+    "lowCards": "牌数不足，即将重新洗牌",
+    "comingSoon": "即将推出",
+    "inDevelopment": "开发中",
+    "allRightsReserved": "版权所有",
+    "comingSoonFeatures": "即将推出的功能",
+    "developmentProgress": "开发进度",
+    "backToHome": "返回首页"
+  },
+  "rules": {
+    "objective": {
+      "title": "游戏目标",
+      "content": "使手牌点数尽可能接近21点，但不能超过21点。点数比庄家大即获胜。"
+    },
+    "cardValues": {
+      "title": "牌面点数",
+      "ace": "可算作1点或11点（系统自动选择最优值，避免爆牌）",
+      "numbers": "按牌面数字计算",
+      "faces": "均为10点",
+      "aceDetails": "A牌详解",
+      "aceDetailsDesc": "A牌初始按11点计算，当总点数超过21点时自动转换为1点，确保不会因A牌而爆牌"
+    },
+    "gameplay": {
+      "title": "游戏流程",
+      "step1": "选择下注金额，点击\"发牌\"",
+      "step2": "玩家和庄家各发2张牌，庄家一张牌面朝下",
+      "step3": "玩家根据牌面选择操作：",
+      "step4": "玩家停牌后，庄家翻开底牌并按规则要牌",
+      "step5": "比较点数，决定胜负"
+    },
+    "actions": {
+      "hit": "再要一张牌",
+      "stand": "不再要牌",
+      "double": "双倍下注，只能再要一张牌"
+    },
+    "special": {
+      "title": "特殊情况",
+      "blackjack": "黑杰克",
+      "blackjackDesc": "前两张牌为A+10点牌，赔率1:1.5",
+      "bust": "爆牌",
+      "bustDesc": "超过21点立即输掉",
+      "dealerRule": "庄家规则",
+      "dealerRuleDesc": "16点或以下必须要牌，硬17或以上必须停牌",
+      "softSeventeen": "软17规则",
+      "softSeventeenDesc": "庄家拿到软17（A+6）时必须要牌，这是标准的赌场规则"
+    },
+    "payouts": {
+      "title": "赔付规则",
+      "win": "获胜",
+      "winDesc": "1:1 赔付",
+      "blackjack": "黑杰克",
+      "blackjackDesc": "1:1.5 赔付",
+      "tie": "平局",
+      "tieDesc": "返还本金",
+      "lose": "失败",
+      "loseDesc": "失去下注金额"
+    },
+    "shortcuts": {
+      "title": "快捷键"
+    }
+  },
+  "features": {
+    "strategy": "策略性思考",
+    "realistic": "真实赌场体验",
+    "responsive": "响应式设计",
+    "aiOpponents": "智能AI对手",
+    "aiOpponentsDesc": "4个不同个性的AI对手，每个都有独特的打牌风格和策略",
+    "multiDifficulty": "多难度设置",
+    "multiDifficultyDesc": "从新手到专家级，4个难度等级满足不同水平玩家",
+    "aiChat": "AI对话系统",
+    "aiChatDesc": "AI对手会根据游戏情况说话，增加游戏的真实感和趣味性",
+    "multipleVariants": "多种玩法",
+    "multipleVariantsDesc": "支持经典德州扑克、奥马哈、短牌德州等多种变体"
+  },
+  "progress": {
+    "architecture": "架构设计",
+    "coreComponents": "核心组件",
+    "aiLogic": "AI逻辑开发",
+    "gameUI": "游戏界面",
+    "testing": "测试优化"
+  },
+  "poker": {
+    "phases": {
+      "pre-flop": "翻牌前",
+      "flop": "翻牌",
+      "turn": "转牌",
+      "river": "河牌",
+      "showdown": "摊牌"
+    },
+    "actions": {
+      "fold": "弃牌",
+      "call": "跟注",
+      "raise": "加注",
+      "check": "过牌",
+      "all-in": "全押",
+      "startHand": "开始游戏"
+    },
+    "communityCards": "公共牌",
+    "pot": "底池",
+    "chips": "筹码",
+    "yourTurn": "轮到你了",
+    "raiseAmount": "加注金额"
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "app": {
+    "title": "Card Game Platform",
+    "subtitle": "Experience the joy of classic card games"
+  },
+  "nav": {
+    "home": "Game Lobby",
+    "blackjack": "Blackjack",
+    "texasHoldem": "Texas Hold'em",
+    "settings": "Settings",
+    "language": "Language"
+  },
+  "games": {
+    "blackjack": {
+      "title": "Blackjack",
+      "description": "Classic blackjack game, challenge the dealer to win",
+      "actions": {
+        "hit": "Hit",
+        "stand": "Stand",
+        "double": "Double",
+        "deal": "Deal",
+        "newGame": "New Game"
+      },
+      "status": {
+        "playerMoney": "Chips",
+        "currentBet": "Bet",
+        "playerScore": "Player Score",
+        "dealerScore": "Dealer Score"
+      },
+      "messages": {
+        "blackjack": "Blackjack! You win!",
+        "bust": "Bust! You lose!",
+        "dealerBust": "Dealer bust! You win!",
+        "win": "You win!",
+        "lose": "Dealer wins!",
+        "tie": "Push!",
+        "placeBet": "Please place your bet first!",
+        "gameOver": "Game Over! You're out of money!"
+      }
+    },
+    "texasHoldem": {
+      "title": "Texas Hold'em",
+      "description": "Play Texas Hold'em poker against AI opponents",
+      "actions": {
+        "fold": "Fold",
+        "call": "Call",
+        "raise": "Raise",
+        "check": "Check",
+        "allIn": "All In",
+        "all-in": "All In",
+        "startHand": "Start Game"
+      },
+      "status": {
+        "pot": "Pot",
+        "bet": "Bet",
+        "chips": "Chips"
+      }
+    }
+  },
+  "common": {
+    "play": "Play",
+    "back": "Back",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "rules": "Game Rules",
+    "placeBet": "Place Bet",
+    "allIn": "All In",
+    "confirmNewGame": "Are you sure you want to start a new game?",
+    "lowCards": "Low cards, reshuffling soon",
+    "comingSoon": "Coming Soon",
+    "inDevelopment": "In Development",
+    "allRightsReserved": "All rights reserved",
+    "comingSoonFeatures": "Upcoming Features",
+    "developmentProgress": "Development Progress",
+    "backToHome": "Back to Home"
+  },
+  "rules": {
+    "objective": {
+      "title": "Game Objective",
+      "content": "Get your hand as close to 21 as possible without going over. Beat the dealer's hand to win."
+    },
+    "cardValues": {
+      "title": "Card Values",
+      "ace": "Can be 1 or 11 (system automatically chooses best value to avoid bust)",
+      "numbers": "Face value",
+      "faces": "All worth 10 points",
+      "aceDetails": "Ace Details",
+      "aceDetailsDesc": "Aces start as 11 points, automatically convert to 1 point when total exceeds 21, preventing bust"
+    },
+    "gameplay": {
+      "title": "How to Play",
+      "step1": "Place your bet and click 'Deal'",
+      "step2": "Player and dealer each get 2 cards, dealer's second card is face down",
+      "step3": "Choose your action based on your cards:",
+      "step4": "After you stand, dealer reveals hidden card and plays by rules",
+      "step5": "Compare scores to determine winner"
+    },
+    "actions": {
+      "hit": "Take another card",
+      "stand": "Keep current hand",
+      "double": "Double bet, take exactly one more card"
+    },
+    "special": {
+      "title": "Special Cases",
+      "blackjack": "Blackjack",
+      "blackjackDesc": "A + 10-value card in first 2 cards, pays 1.5:1",
+      "bust": "Bust",
+      "bustDesc": "Over 21 points, lose immediately",
+      "dealerRule": "Dealer Rules",
+      "dealerRuleDesc": "Must hit on 16 or less, must stand on hard 17 or more",
+      "softSeventeen": "Soft 17 Rule",
+      "softSeventeenDesc": "Dealer must hit on soft 17 (A+6), this is standard casino rule"
+    },
+    "payouts": {
+      "title": "Payout Rules",
+      "win": "Win",
+      "winDesc": "1:1 payout",
+      "blackjack": "Blackjack",
+      "blackjackDesc": "1.5:1 payout",
+      "tie": "Push",
+      "tieDesc": "Get your bet back",
+      "lose": "Lose",
+      "loseDesc": "Lose your bet"
+    },
+    "shortcuts": {
+      "title": "Keyboard Shortcuts"
+    }
+  },
+  "features": {
+    "strategy": "Strategic Thinking",
+    "realistic": "Realistic Casino Experience",
+    "responsive": "Responsive Design",
+    "aiOpponents": "Smart AI Opponents",
+    "aiOpponentsDesc": "4 AI opponents with unique personalities and playing styles",
+    "multiDifficulty": "Multi-Difficulty Settings",
+    "multiDifficultyDesc": "4 difficulty levels from beginner to master for all skill levels",
+    "aiChat": "AI Chat System",
+    "aiChatDesc": "AI opponents communicate based on game situations for realistic experience",
+    "multipleVariants": "Multiple Game Variants",
+    "multipleVariantsDesc": "Support for Texas Hold'em, Omaha, Short Deck and more variants"
+  },
+  "progress": {
+    "architecture": "Architecture Design",
+    "coreComponents": "Core Components",
+    "aiLogic": "AI Logic Development",
+    "gameUI": "Game Interface",
+    "testing": "Testing & Optimization"
+  },
+  "poker": {
+    "phases": {
+      "pre-flop": "Pre-Flop",
+      "flop": "Flop",
+      "turn": "Turn",
+      "river": "River",
+      "showdown": "Showdown"
+    },
+    "actions": {
+      "fold": "Fold",
+      "call": "Call",
+      "raise": "Raise",
+      "check": "Check",
+      "all-in": "All In",
+      "startHand": "Start Game"
+    },
+    "communityCards": "Community Cards",
+    "pot": "Pot",
+    "chips": "Chips",
+    "yourTurn": "Your Turn",
+    "raiseAmount": "Raise Amount"
+  }
+}
