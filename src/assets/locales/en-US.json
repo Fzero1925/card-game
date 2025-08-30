@@ -170,5 +170,14 @@
     "chips": "Chips",
     "yourTurn": "Your Turn",
     "raiseAmount": "Raise Amount"
+  },
+  "texas": {
+    "dialogue": {
+      "title": "AI Chat",
+      "show": "Show chat panel",
+      "hide": "Hide chat panel",
+      "waiting": "AI players haven't spoken yet...",
+      "clear": "Clear Messages"
+    }
   }
 }

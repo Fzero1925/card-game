@@ -162,3 +162,67 @@ export interface GameStats {
   biggestPot: number
   favoriteHand: HandRank | null
 }
+
+// === AI对话系统类型定义 ===
+
+// 对话触发器类型
+export type DialogueTrigger = 
+  | 'game-start'
+  | 'hand-start'
+  | 'pre-flop'
+  | 'flop'
+  | 'turn'
+  | 'river'
+  | 'showdown'
+  | 'win-hand'
+  | 'lose-hand'
+  | 'fold'
+  | 'call'
+  | 'raise'
+  | 'all-in'
+  | 'bluff-caught'
+  | 'good-hand'
+  | 'bad-hand'
+  | 'big-pot'
+  | 'low-chips'
+  | 'opponent-aggressive'
+  | 'opponent-passive'
+  | 'lucky-draw'
+  | 'unlucky-draw'
+
+// AI对话消息
+export interface AIDialogueMessage {
+  id: string
+  playerId: string
+  playerName: string
+  message: string
+  trigger: DialogueTrigger
+  timestamp: number
+  personality: AIConfig['personality']
+}
+
+// 对话内容配置
+export interface DialogueContent {
+  trigger: DialogueTrigger
+  messages: string[]
+  conditions?: {
+    minChattiness?: number // 最低聊天频率要求
+    gamePhase?: PokerGamePhase[] // 适用的游戏阶段
+    handStrength?: ('weak' | 'medium' | 'strong' | 'very_strong')[] // 适用的手牌强度
+    potSize?: 'small' | 'medium' | 'large' // 底池大小要求
+  }
+}
+
+// AI个性对话配置
+export interface PersonalityDialogue {
+  personality: AIConfig['personality']
+  dialogues: DialogueContent[]
+}
+
+// 对话历史记录
+export interface DialogueHistory {
+  playerId: string
+  lastMessageTime: number
+  messageCount: number
+  recentTriggers: DialogueTrigger[]
+}

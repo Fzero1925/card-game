@@ -170,5 +170,14 @@
     "chips": "筹码",
     "yourTurn": "轮到你了",
     "raiseAmount": "加注金额"
+  },
+  "texas": {
+    "dialogue": {
+      "title": "AI对话",
+      "show": "显示对话面板",
+      "hide": "隐藏对话面板",
+      "waiting": "AI们还没有说话...",
+      "clear": "清空记录"
+    }
   }
 }

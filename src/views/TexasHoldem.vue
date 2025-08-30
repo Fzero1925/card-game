@@ -137,6 +137,12 @@
           {{ gameMessage.message }}
         </div>
       </div>
+
+      <!-- AI对话面板 -->
+      <AIDialoguePanel
+        :messages="dialogueMessages"
+        @clear-messages="clearDialogueMessages"
+      />
     </main>
   </div>
 </template>
@@ -147,6 +153,7 @@ import { useI18n } from 'vue-i18n'
 import { useTexasHoldemStore } from '@/stores/texasHoldem'
 import LanguageSwitch from '@/components/common/LanguageSwitch.vue'
 import Card from '@/components/common/Card.vue'
+import AIDialoguePanel from '@/components/texas-holdem/AIDialoguePanel.vue'
 import type { PokerAction, PokerPlayer } from '@/types/game'
 
 const { t } = useI18n()
@@ -164,8 +171,10 @@ const {
   totalPot,
   isPlayerTurn,
   gameMessage,
+  dialogueMessages,
   humanPlayer,
-  startNewHand
+  startNewHand,
+  clearDialogueMessages
 } = store
 
 // 本地状态

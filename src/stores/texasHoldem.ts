@@ -2,6 +2,8 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { useCardDeck } from '@/composables/useCardDeck'
 import { getAIDecision } from '@/utils/ai/pokerAI'
+import { getAIDialogue, resetDialogueHistory } from '@/utils/ai/aiDialogue'
+import { evaluateHandStrength } from '@/utils/ai/pokerAI'
 import type { 
   TexasHoldemState, 
   PokerPlayer, 
@@ -12,7 +14,9 @@ import type {
   BettingAction,
   PokerGamePhase,
   PokerGameStatus,
-  AIConfig 
+  AIConfig,
+  AIDialogueMessage,
+  DialogueTrigger
 } from '@/types/game'
 
 export const useTexasHoldemStore = defineStore('texasHoldem', () => {
@@ -38,6 +42,9 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
   
   // 游戏消息
   const gameMessage = ref<GameMessage | null>(null)
+  
+  // AI对话消息
+  const dialogueMessages = ref<AIDialogueMessage[]>([])
   
   // 牌堆管理
   const deck = useCardDeck()
@@ -99,6 +106,9 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
     gameInProgress.value = false
     currentBet.value = 0
     clearMessage()
+    
+    // 重置对话系统
+    resetDialogueSystem()
     
     // 创建新牌堆
     deck.createDeck(1, 'poker')
@@ -198,6 +208,11 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
 
     // 发底牌
     dealHoleCards()
+
+    // 触发新手牌开始对话
+    setTimeout(() => {
+      triggerAIDialogue('hand-start')
+    }, 1000)
 
     // 开始翻牌前下注
     startBettingRound()
@@ -311,6 +326,10 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
     switch (action) {
       case 'fold':
         player.isFolded = true
+        // 触发弃牌对话
+        if (player.isAI) {
+          setTimeout(() => triggerAIDialogue('fold', player), 500)
+        }
         break
         
       case 'check':
@@ -333,6 +352,11 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
         if (callAmount < currentBet.value - player.totalBetInRound) {
           player.isAllIn = true
         }
+        
+        // 触发跟注对话
+        if (player.isAI) {
+          setTimeout(() => triggerAIDialogue('call', player), 500)
+        }
         break
         
       case 'raise':
@@ -348,6 +372,11 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
         if (player.chips === 0) {
           player.isAllIn = true
         }
+        
+        // 触发加注对话
+        if (player.isAI) {
+          setTimeout(() => triggerAIDialogue('raise', player), 500)
+        }
         break
         
       case 'all-in':
@@ -360,6 +389,11 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
         
         if (player.totalBetInRound > currentBet.value) {
           currentBet.value = player.totalBetInRound
+        }
+        
+        // 触发全押对话
+        if (player.isAI) {
+          setTimeout(() => triggerAIDialogue('all-in', player), 500)
         }
         break
     }
@@ -437,14 +471,20 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
       case 'pre-flop':
         gamePhase.value = 'flop'
         dealFlop()
+        // 触发翻牌对话
+        setTimeout(() => triggerAIDialogue('flop'), 800)
         break
       case 'flop':
         gamePhase.value = 'turn'
         dealTurn()
+        // 触发转牌对话
+        setTimeout(() => triggerAIDialogue('turn'), 800)
         break
       case 'turn':
         gamePhase.value = 'river'
         dealRiver()
+        // 触发河牌对话
+        setTimeout(() => triggerAIDialogue('river'), 800)
         break
       case 'river':
         gamePhase.value = 'showdown'
@@ -526,6 +566,17 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
     
     setMessage(messageKey, 'success')
 
+    // 触发获胜/失败对话
+    setTimeout(() => {
+      if (winner.isAI) {
+        triggerAIDialogue('win-hand', winner)
+      }
+      // 为失败的AI触发失败对话
+      players.value.filter(p => p.isAI && p.id !== winner.id && !p.isFolded).forEach(player => {
+        setTimeout(() => triggerAIDialogue('lose-hand', player), Math.random() * 1000 + 500)
+      })
+    }, 1000)
+
     // 准备下一手牌
     setTimeout(() => {
       prepareNextHand()
@@ -569,6 +620,11 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
   const newGame = () => {
     initializeGame()
     setMessage('新游戏开始！', 'info')
+    
+    // 触发游戏开始对话
+    setTimeout(() => {
+      triggerAIDialogue('game-start')
+    }, 1500)
   }
 
   // 设置消息
@@ -583,6 +639,58 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
   // 清除消息
   const clearMessage = () => {
     gameMessage.value = null
+  }
+
+  // AI对话相关方法
+  const triggerAIDialogue = (trigger: DialogueTrigger, specificPlayer?: PokerPlayer) => {
+    const currentTime = Date.now()
+    const totalChips = players.value.reduce((sum, p) => sum + p.chips, 0)
+    
+    // 如果指定了玩家，只为该玩家触发对话
+    const targetPlayers = specificPlayer ? [specificPlayer] : players.value.filter(p => p.isAI)
+    
+    targetPlayers.forEach(player => {
+      if (!player.isAI) return
+      
+      // 评估手牌强度（如果有底牌）
+      let handStrength: 'weak' | 'medium' | 'strong' | 'very_strong' | undefined
+      if (player.holeCards.length >= 2) {
+        const strength = evaluateHandStrength(
+          player.holeCards,
+          communityCards.value,
+          gamePhase.value
+        )
+        handStrength = strength.category
+      }
+      
+      const gameContext = {
+        gamePhase: gamePhase.value,
+        potSize: totalPot.value,
+        handStrength,
+        totalChips
+      }
+      
+      const dialogueMessage = getAIDialogue(player, trigger, gameContext)
+      if (dialogueMessage) {
+        dialogueMessages.value.push(dialogueMessage)
+        
+        // 保持消息列表在合理长度内
+        if (dialogueMessages.value.length > 50) {
+          dialogueMessages.value.shift()
+        }
+      }
+    })
+  }
+
+  // 清空对话消息
+  const clearDialogueMessages = () => {
+    dialogueMessages.value = []
+  }
+
+  // 重置对话历史
+  const resetDialogueSystem = () => {
+    clearDialogueMessages()
+    resetDialogueHistory()
   }
 
   // 获取玩家可用动作
@@ -639,6 +747,7 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
     bettingActions,
     currentBet,
     gameMessage,
+    dialogueMessages,
 
     // 计算属性
     currentPlayer,
@@ -653,6 +762,9 @@ export const useTexasHoldemStore = defineStore('texasHoldem', () => {
     getAvailableActions,
     newGame,
     setMessage,
-    clearMessage
+    clearMessage,
+    triggerAIDialogue,
+    clearDialogueMessages,
+    resetDialogueSystem
   }
 })
