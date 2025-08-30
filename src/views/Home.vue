@@ -54,12 +54,11 @@
             </div>
           </div>
 
-          <!-- 德州扑克游戏卡片 (开发中) -->
-          <div class="game-card poker-card coming-soon">
+          <!-- 德州扑克游戏卡片 -->
+          <div class="game-card poker-card">
             <div class="card-header">
               <div class="game-icon">🎰</div>
               <h2>{{ $t('games.texasHoldem.title') }}</h2>
-              <span class="coming-soon-badge">{{ $t('common.comingSoon') }}</span>
             </div>
 
             <div class="card-body">
@@ -82,10 +81,10 @@
             </div>
 
             <div class="card-footer">
-              <button class="play-btn secondary disabled" disabled>
-                <span class="btn-icon">🚧</span>
-                {{ $t('common.inDevelopment') }}
-              </button>
+              <router-link to="/texas-holdem" class="play-btn primary">
+                <span class="btn-icon">🎮</span>
+                {{ $t('common.play') }}
+              </router-link>
             </div>
           </div>
         </div>
